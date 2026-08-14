@@ -34,11 +34,15 @@ public class BookServiceImpl implements BookService{
     @Override
     public BookResponseDto getbyid(Long id) {
 
-        Book book=repo.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Book not found"));
 
 
-        return mapper.toBookResponseDto(book);
+           Book book = repo.findById(id)
+                      .orElseThrow(() -> new ResourceNotFoundException("Book not found"));
+
+
+              return mapper.toBookResponseDto(book);
+
+
     }
 
 
