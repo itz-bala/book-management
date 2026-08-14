@@ -13,14 +13,27 @@ public class ModelMappingUseCase {
 
     private final ModelMapper mapper;
 
+        // dto to entity
+
        public Book toBook(BookRequestDto dto){
            return mapper.map(dto,Book.class);
        }
+
+
+
+          //entity to dto
 
     public BookResponseDto toBookResponseDto(Book book){
 
            return  mapper.map(book,BookResponseDto.class);
     }
 
+
+    //update entity and return dto
+
+    public void updateEntity(BookRequestDto dto, Book book){
+
+           mapper.map(dto,book);
+    }
 
 }
