@@ -9,6 +9,8 @@ import main.Mapping.ModelMappingUseCase;
 import main.Repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService{
@@ -39,6 +41,44 @@ public class BookServiceImpl implements BookService{
         return mapper.toBookResponseDto(book);
     }
 
+
+    //getAll
+    @Override
+    public List<BookResponseDto> getAll() {
+
+       List<Book>list=repo.findAll();
+
+        return list.stream().map(mapper::toBookResponseDto).toList();
+    }
+
+
+
+     //delete
+    @Override
+    public void delete(Long id) {
+
+        Book book=repo.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("Book not found"));
+
+        repo.delete(book);
+    }
+
+    @Override
+    public BookResponseDto update(Long id, BookRequestDto dto) {
+
+
+        Book book=repo.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("Book not found"));
+
+
+
+             mapper.updateEntity(dto,book);
+
+
+             Book updated=repo.save(book);
+
+             return  mapper.toBookResponseDto(updated);
+    }
 
 
 }
