@@ -24,6 +24,7 @@ public class BookController {
         BookResponseDto response=service.create(dto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
     }
 
     //getbyid
@@ -32,6 +33,7 @@ public class BookController {
 
         BookResponseDto response=service.getbyid(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 
     //getAll
